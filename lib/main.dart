@@ -1,53 +1,70 @@
-import 'dart:async';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'app.dart';
-import 'database/db.dart';
 
-void main() async {
-  // 确保 Flutter 绑定初始化
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // 初始化数据库
-  await DatabaseHelper.instance.database;
-
-  // 配置全局异常处理
-  _setupErrorHandling();
-
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+void main() {
+  runApp(const MyApp());
 }
 
-/// 配置全局异常处理
-void _setupErrorHandling() {
-  // 捕获 Flutter 框架错误
-  FlutterError.onError = (FlutterErrorDetails details) {
-    // 打印到控制台
-    FlutterError.presentError(details);
-    // 可以在这里上报错误到日志系统
-    debugPrint('Flutter Error: ${details.exception}');
-    debugPrint('Stack trace: ${details.stack}');
-  };
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  // 捕获 Dart 异步错误
-  PlatformDispatcher.instance.onError = (error, stack) {
-    // 打印到控制台
-    debugPrint('Platform Error: $error');
-    debugPrint('Stack trace: $stack');
-    // 返回 true 表示已处理
-    return true;
-  };
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '个人记账',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
+      home: const HomePage(),
+    );
+  }
+}
 
-  // 捕获未处理的异步错误
-  runZonedGuarded(() {
-    // 应用启动
-  }, (error, stack) {
-    // 打印到控制台
-    debugPrint('Uncaught Error: $error');
-    debugPrint('Stack trace: $stack');
-  });
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('个人记账'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.account_balance_wallet,
+              size: 100,
+              color: Colors.blue,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              '欢迎使用个人记账',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 40),
+            ElevatedButton.icon(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('功能开发中...')),
+                );
+              },
+              icon: const Icon(Icons.add),
+              label: const Text('添加交易'),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('功能开发中...')),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
 }
