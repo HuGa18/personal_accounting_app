@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:go_router/go_router.dart';
 import 'router/router.dart';
 import 'exceptions/exceptions.dart';
@@ -11,6 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (kIsWeb) {
+      return MaterialApp(
+        title: '个人记账',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          useMaterial3: true,
+        ),
+        home: const WebUnsupportedPage(),
+      );
+    }
+    
     return MaterialApp.router(
       title: '个人记账',
       debugShowCheckedModeBanner: false,
@@ -276,4 +289,70 @@ class _NavigationItem {
     required this.selectedIcon,
     required this.label,
   });
+}
+
+/// Web 平台不支持页面
+class WebUnsupportedPage extends StatelessWidget {
+  const WebUnsupportedPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.phone_android,
+                size: 80,
+                color: Colors.blue,
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                '个人记账应用',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                '此应用需要在移动设备上运行',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                '请下载 Android 或 iOS 版本',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton.icon(
+                onPressed: () {
+                  // 可以添加下载链接
+                },
+                icon: const Icon(Icons.download),
+                label: const Text('下载应用'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
