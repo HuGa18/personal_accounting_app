@@ -298,7 +298,7 @@ class HomePage extends ConsumerWidget {
                     ),
                     const SizedBox(height: 4),
                     LinearProgressIndicator(
-                      value: percentage > 1 ? 1 : percentage,
+                      value: percentage > 1 ? 1.0 : percentage.toDouble(),
                       backgroundColor: Colors.grey[200],
                       valueColor: AlwaysStoppedAnimation<Color>(
                         isOverBudget ? Colors.red : Colors.blue,
@@ -497,7 +497,7 @@ class HomePage extends ConsumerWidget {
 
                 return Column(
                   children: recentTransactions
-                      .map((tx) => _buildTransactionItem(context, tx))
+                      .map((tx) => _buildTransactionItem(context, ref, tx))
                       .toList(),
                 );
               },
@@ -521,7 +521,7 @@ class HomePage extends ConsumerWidget {
   }
 
   /// 构建交易记录项
-  Widget _buildTransactionItem(BuildContext context, Transaction transaction) {
+  Widget _buildTransactionItem(BuildContext context, WidgetRef ref, Transaction transaction) {
     final isExpense = transaction.type == 'expense';
     final amountColor = isExpense ? Colors.red : Colors.green;
     final amountPrefix = isExpense ? '-' : '+';

@@ -273,8 +273,8 @@ class _TransactionFormPageState extends ConsumerState<TransactionFormPage> {
           ],
         );
       },
-      loading: () => const TextFormField(
-        decoration: InputDecoration(
+      loading: () => TextFormField(
+        decoration: const InputDecoration(
           labelText: '分类',
           border: OutlineInputBorder(),
           suffixIcon: SizedBox(
@@ -327,8 +327,8 @@ class _TransactionFormPageState extends ConsumerState<TransactionFormPage> {
           return null;
         },
       ),
-      loading: () => const TextFormField(
-        decoration: InputDecoration(
+      loading: () => TextFormField(
+        decoration: const InputDecoration(
           labelText: '账户',
           border: OutlineInputBorder(),
           suffixIcon: SizedBox(
@@ -441,7 +441,6 @@ class _TransactionFormPageState extends ConsumerState<TransactionFormPage> {
     final time = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.fromDateTime(_transactionDate),
-      locale: const Locale('zh', 'CN'),
     );
 
     if (time == null) return;
@@ -490,7 +489,7 @@ class _TransactionFormPageState extends ConsumerState<TransactionFormPage> {
       );
 
       if (_existingTransaction != null) {
-        await ref.read(transactionsProvider.notifier).update(transaction);
+        await ref.read(transactionsProvider.notifier).updateTransaction(transaction);
       } else {
         await ref.read(transactionsProvider.notifier).add(transaction);
       }

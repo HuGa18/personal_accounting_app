@@ -137,7 +137,6 @@ class WechatParser extends BillParser {
   @override
   Future<List<Transaction>> parseExcel(Uint8List fileBytes, String accountId) async {
     try {
-      final bytes = ByteData.sublistView(fileBytes);
       final excel = Excel.decodeBytes(bytes);
 
       final transactions = <Transaction>[];
@@ -266,7 +265,8 @@ class WechatParser extends BillParser {
       final amount = parseAmount(amountMatch.group(0));
       if (amount == null || amount == 0) continue;
 
-      final merchantPart = line.substring(dateMatch.end, line.indexOf(amountMatch.group(0), dateMatch.end)).trim();
+      final amountStr = amountMatch.group(0)!;
+      final merchantPart = line.substring(dateMatch.end, line.indexOf(amountStr, dateMatch.end)).trim();
       
       final transactionType = determineTransactionType(amount);
       final merchantName = merchantPart.isNotEmpty ? merchantPart : '微信支付';

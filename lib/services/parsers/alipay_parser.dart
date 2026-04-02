@@ -136,8 +136,7 @@ class AlipayParser extends BillParser {
   @override
   Future<List<Transaction>> parseExcel(Uint8List fileBytes, String accountId) async {
     try {
-      final bytes = ByteData.sublistView(fileBytes);
-      final excel = Excel.decodeBytes(bytes);
+      final excel = Excel.decodeBytes(fileBytes);
 
       final transactions = <Transaction>[];
 
@@ -270,7 +269,8 @@ class AlipayParser extends BillParser {
       if (amount == null || amount == 0) continue;
 
       // 提取商户名称（在日期和金额之间）
-      final merchantPart = line.substring(dateMatch.end, line.indexOf(amountMatch.group(0), dateMatch.end)).trim();
+      final amountStr = amountMatch.group(0)!;
+      final merchantPart = line.substring(dateMatch.end, line.indexOf(amountStr, dateMatch.end)).trim();
       
       final transactionType = determineTransactionType(amount);
       final merchantName = merchantPart.isNotEmpty ? merchantPart : '支付宝交易';

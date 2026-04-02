@@ -83,24 +83,23 @@ class _ImportPageState extends ConsumerState<ImportPage> {
 
   /// 构建步骤控制按钮
   Widget _buildControls(
-    BuildContext context, {
-    VoidCallback? onStepContinue,
-    VoidCallback? onStepCancel,
-  }) {
+    BuildContext context,
+    ControlsDetails details,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: Row(
         children: [
           if (_currentStep < 3)
             ElevatedButton(
-              onPressed: onStepContinue,
+              onPressed: details.onStepContinue,
               child: const Text('继续'),
             ),
           if (_currentStep > 0 && _currentStep < 3)
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: TextButton(
-                onPressed: onStepCancel,
+                onPressed: details.onStepCancel,
                 child: const Text('返回'),
               ),
             ),

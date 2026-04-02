@@ -135,7 +135,6 @@ class JdBaitiaoParser extends BillParser {
   @override
   Future<List<Transaction>> parseExcel(Uint8List fileBytes, String accountId) async {
     try {
-      final bytes = ByteData.sublistView(fileBytes);
       final excel = Excel.decodeBytes(bytes);
 
       final transactions = <Transaction>[];
