@@ -124,7 +124,7 @@ class DigitalRmbParser extends BillParser {
   @override
   Future<List<Transaction>> parseExcel(Uint8List fileBytes, String accountId) async {
     try {
-      final excel = Excel.decodeBytes(bytes);
+      final excel = Excel.decodeBytes(fileBytes);
 
       final transactions = <Transaction>[];
 
