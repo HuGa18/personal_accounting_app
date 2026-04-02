@@ -2,8 +2,8 @@ import 'package:intl/intl.dart';
 import 'constants.dart';
 
 /// 日期格式化工具类
-class DateUtils {
-  DateUtils._();
+class AppDateUtils {
+  AppDateUtils._();
 
   static final DateFormat _dateFormat = DateFormat(Constants.dateFormat);
   static final DateFormat _dateTimeFormat = DateFormat(Constants.dateTimeFormat);

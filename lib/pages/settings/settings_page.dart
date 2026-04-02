@@ -305,7 +305,7 @@ class SettingsPage extends ConsumerWidget {
             Icon(Icons.access_time, size: 16, color: Colors.grey[600]),
             const SizedBox(width: 8),
             Text(
-              '首条记录: ${DateUtils.formatDate(firstDate)} ~ 末条记录: ${DateUtils.formatDate(lastDate)}',
+              '首条记录: ${AppDateUtils.formatDate(firstDate)} ~ 末条记录: ${AppDateUtils.formatDate(lastDate)}',
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
             ),
           ],

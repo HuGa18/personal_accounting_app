@@ -162,7 +162,7 @@ class HomePage extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  DateUtils.formatMonth(DateTime.now()),
+                  AppDateUtils.formatMonth(DateTime.now()),
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[600],
@@ -375,10 +375,10 @@ class HomePage extends ConsumerWidget {
 
     for (int i = 6; i >= 0; i--) {
       final date = now.subtract(Duration(days: i));
-      final dateStr = DateUtils.formatDate(date);
+      final dateStr = AppDateUtils.formatDate(date);
 
       final stat = dailyStatistics.firstWhere(
-        (s) => DateUtils.formatDate(s.date) == dateStr,
+        (s) => AppDateUtils.formatDate(s.date) == dateStr,
         orElse: () => DailyStatisticsDTO(
           date: date,
           expense: 0,
@@ -541,7 +541,7 @@ class HomePage extends ConsumerWidget {
         style: const TextStyle(fontSize: 14),
       ),
       subtitle: Text(
-        DateUtils.getRelativeTime(transaction.transactionDate),
+        AppDateUtils.getRelativeTime(transaction.transactionDate),
         style: TextStyle(fontSize: 12, color: Colors.grey[600]),
       ),
       trailing: Text(

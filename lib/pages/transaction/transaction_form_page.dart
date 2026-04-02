@@ -414,7 +414,7 @@ class _TransactionFormPageState extends ConsumerState<TransactionFormPage> {
       ),
       title: const Text('交易时间'),
       subtitle: Text(
-        DateUtils.formatDateTime(_transactionDate),
+        AppDateUtils.formatDateTime(_transactionDate),
         style: const TextStyle(fontSize: 16),
       ),
       trailing: const Icon(Icons.calendar_today),

@@ -33,7 +33,7 @@ class BudgetsNotifier extends AsyncNotifier<List<Budget>> {
   }
 
   /// 更新预算
-  Future<void> update(Budget budget) async {
+  Future<void> updateItem(Budget budget) async {
     if (budget.amount <= 0) {
       throw Exception('预算金额必须大于0');
     }

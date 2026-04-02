@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/pages.dart';
+import '../widgets/main_shell.dart';
 
 /// 应用路由配置
 /// 使用 go_router 进行路由管理

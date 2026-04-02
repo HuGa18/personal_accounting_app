@@ -478,7 +478,7 @@ class _ImportPageState extends ConsumerState<ImportPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              DateUtils.formatDateTime(transaction.transactionDate),
+              AppDateUtils.formatDateTime(transaction.transactionDate),
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
             ),
             const SizedBox(height: 4),

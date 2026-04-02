@@ -32,7 +32,7 @@ class AccountsNotifier extends AsyncNotifier<List<Account>> {
   }
 
   /// 更新账户
-  Future<void> update(Account account) async {
+  Future<void> updateAccount(Account account) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final repository = ref.read(accountRepositoryProvider);

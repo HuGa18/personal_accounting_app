@@ -177,7 +177,7 @@ class _StatisticsPageState extends ConsumerState<StatisticsPage> {
                 child: Row(
                   children: [
                     Text(
-                      '${DateUtils.formatDate(timeRangeState.startDate)} 至 ${DateUtils.formatDate(timeRangeState.endDate)}',
+                      '${AppDateUtils.formatDate(timeRangeState.startDate)} 至 ${AppDateUtils.formatDate(timeRangeState.endDate)}',
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey[600],
@@ -263,11 +263,11 @@ class _StatisticsPageState extends ConsumerState<StatisticsPage> {
     String periodText;
     switch (timeRangeState.range) {
       case StatisticsTimeRange.thisMonth:
-        periodText = DateUtils.formatMonth(DateTime.now());
+        periodText = AppDateUtils.formatMonth(DateTime.now());
         break;
       case StatisticsTimeRange.lastMonth:
         final lastMonth = DateTime.now().subtract(const Duration(days: 30));
-        periodText = DateUtils.formatMonth(lastMonth);
+        periodText = AppDateUtils.formatMonth(lastMonth);
         break;
       case StatisticsTimeRange.thisQuarter:
         periodText = '本季度';

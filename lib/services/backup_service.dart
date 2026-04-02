@@ -212,7 +212,7 @@ class BackupService {
 
       // 保存到文件
       final directory = await getApplicationDocumentsDirectory();
-      final fileName = '记账数据备份_${DateUtils.formatDate(DateTime.now())}.mabak';
+      final fileName = '记账数据备份_${AppDateUtils.formatDate(DateTime.now())}.mabak';
       final file = File('${directory.path}/$fileName');
       await file.writeAsBytes(compressedData);
 
@@ -353,7 +353,7 @@ class BackupService {
       await snapshotsDir.create(recursive: true);
     }
 
-    final fileName = 'snapshot_${DateUtils.formatDateTime(DateTime.now()).replaceAll(':', '-')}.snap';
+    final fileName = 'snapshot_${AppDateUtils.formatDateTime(DateTime.now()).replaceAll(':', '-')}.snap';
     final file = File('${snapshotsDir.path}/$fileName');
     await file.writeAsBytes(compressedData);
 

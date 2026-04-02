@@ -229,7 +229,7 @@ class _TransactionListPageState extends ConsumerState<TransactionListPage> {
 
     final groups = <String, List<Transaction>>{};
     for (var tx in sortedTransactions) {
-      final dateKey = DateUtils.formatDate(tx.transactionDate);
+      final dateKey = AppDateUtils.formatDate(tx.transactionDate);
       groups.putIfAbsent(dateKey, () => []);
       groups[dateKey]!.add(tx);
     }
@@ -279,13 +279,13 @@ class _TransactionListPageState extends ConsumerState<TransactionListPage> {
 
   /// 格式化日期显示
   String _formatDateDisplay(String dateStr) {
-    final date = DateUtils.parseDate(dateStr);
-    if (DateUtils.isToday(date)) {
-      return '今天 ${DateUtils.formatDate(date)}';
-    } else if (DateUtils.isYesterday(date)) {
-      return '昨天 ${DateUtils.formatDate(date)}';
+    final date = AppDateUtils.parseDate(dateStr);
+    if (AppDateUtils.isToday(date)) {
+      return '今天 ${AppDateUtils.formatDate(date)}';
+    } else if (AppDateUtils.isYesterday(date)) {
+      return '昨天 ${AppDateUtils.formatDate(date)}';
     } else {
-      return DateUtils.formatDate(date);
+      return AppDateUtils.formatDate(date);
     }
   }
 
@@ -506,7 +506,7 @@ class _TransactionDetailSheet extends ConsumerWidget {
           // 详情列表
           _buildDetailItem('商户名称', transaction.merchantName ?? '-'),
           _buildDetailItem('交易类型', isExpense ? '支出' : '收入'),
-          _buildDetailItem('交易时间', DateUtils.formatDateTime(transaction.transactionDate)),
+          _buildDetailItem('交易时间', AppDateUtils.formatDateTime(transaction.transactionDate)),
           _buildDetailItem('备注', transaction.description ?? '-'),
           _buildDetailItem('来源', transaction.source ?? '手动记录'),
           if (transaction.location != null)
@@ -701,7 +701,7 @@ class _TransactionFilterSheetState extends ConsumerState<TransactionFilterSheet>
                   onPressed: () => _selectStartDate(),
                   child: Text(
                     _startDate != null
-                        ? DateUtils.formatDate(_startDate!)
+                        ? AppDateUtils.formatDate(_startDate!)
                         : '开始日期',
                   ),
                 ),
@@ -715,7 +715,7 @@ class _TransactionFilterSheetState extends ConsumerState<TransactionFilterSheet>
                   onPressed: () => _selectEndDate(),
                   child: Text(
                     _endDate != null
-                        ? DateUtils.formatDate(_endDate!)
+                        ? AppDateUtils.formatDate(_endDate!)
                         : '结束日期',
                   ),
                 ),

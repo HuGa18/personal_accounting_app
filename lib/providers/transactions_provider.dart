@@ -62,7 +62,7 @@ class TransactionsNotifier extends AsyncNotifier<List<Transaction>> {
   }
 
   /// 更新交易
-  Future<void> update(Transaction transaction) async {
+  Future<void> updateTransaction(Transaction transaction) async {
     if (transaction.amount <= 0) {
       throw Exception('交易金额必须大于0');
     }

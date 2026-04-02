@@ -72,7 +72,7 @@ class TransactionListTile extends StatelessWidget {
     final parts = <String>[];
     
     if (showDate) {
-      parts.add(DateUtils.formatDate(transaction.transactionDate));
+      parts.add(AppDateUtils.formatDate(transaction.transactionDate));
     }
     parts.add(timeStr);
     

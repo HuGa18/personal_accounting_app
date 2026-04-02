@@ -29,7 +29,7 @@ class CategoriesNotifier extends AsyncNotifier<List<Category>> {
   }
 
   /// 更新分类
-  Future<void> update(Category category) async {
+  Future<void> updateItem(Category category) async {
     final repository = ref.read(categoryRepositoryProvider);
     await repository.update(category);
     ref.invalidateSelf();
