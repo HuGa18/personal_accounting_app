@@ -1,5 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
@@ -14,13 +16,24 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'accounting.db');
-    return await openDatabase(
-      path,
-      version: 2,
-      onCreate: _onCreate,
-      onUpgrade: _onUpgrade,
-    );
+    if (kIsWeb) {
+      // Web platform
+      return await openDatabase(
+        'accounting.db',
+        version: 2,
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade,
+      );
+    } else {
+      // Mobile platform
+      String path = join(await getDatabasesPath(), 'accounting.db');
+      return await openDatabase(
+        path,
+        version: 2,
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade,
+      );
+    }
   }
 
   Future<void> _onCreate(Database db, int version) async {
