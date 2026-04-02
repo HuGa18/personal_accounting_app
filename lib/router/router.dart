@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/pages.dart';
+import '../pages/transaction/transaction_detail_page.dart';
 import '../widgets/main_shell.dart';
 
 /// 应用路由配置
@@ -44,6 +45,15 @@ final GoRouter appRouter = GoRouter(
       path: '/transactions/add',
       name: 'transaction-add',
       builder: (context, state) => const TransactionFormPage(),
+    ),
+    // 交易详情
+    GoRoute(
+      path: '/transactions/detail/:id',
+      name: 'transaction-detail',
+      builder: (context, state) {
+        final id = state.pathParameters['id']!;
+        return TransactionDetailPage(transactionId: id);
+      },
     ),
     // 编辑交易
     GoRoute(

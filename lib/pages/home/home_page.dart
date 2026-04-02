@@ -552,8 +552,10 @@ class HomePage extends ConsumerWidget {
           color: amountColor,
         ),
       ),
-      onTap: () {
-        // TODO: Navigate to transaction detail page
+      onTap: () async {
+        await context.push('/transactions/detail/${transaction.id}');
+        ref.invalidate(thisMonthStatisticsProvider);
+        ref.invalidate(transactionsProvider);
       },
     );
   }

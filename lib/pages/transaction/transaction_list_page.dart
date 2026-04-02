@@ -318,14 +318,22 @@ class _TransactionListPageState extends ConsumerState<TransactionListPage> {
         return await _confirmDelete(transaction);
       },
       onDismissed: (direction) {
-        ref.read(transactionsProvider.notifier).delete(transaction.id);
+        final deletedTransactionId = transaction.id;
+        final deletedTransactionName = transaction.merchantName ?? '交易记录';
+        
+        ref.read(transactionsProvider.notifier).delete(deletedTransactionId);
+        
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('已删除: ${transaction.merchantName ?? "交易记录"}'),
+            content: Text('已删除: $deletedTransactionName'),
+            duration: const Duration(seconds: 5),
             action: SnackBarAction(
               label: '撤销',
               onPressed: () {
-                // TODO: Implement undo
+                ref.read(transactionsProvider.notifier).restore(deletedTransactionId);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('已恢复')),
+                );
               },
             ),
           ),
@@ -375,9 +383,9 @@ class _TransactionListPageState extends ConsumerState<TransactionListPage> {
             color: amountColor,
           ),
         ),
-        onTap: () {
-          // TODO: Navigate to transaction detail page
-          _showTransactionDetail(transaction);
+        onTap: () async {
+          await context.push('/transactions/detail/${transaction.id}');
+          _refresh();
         },
       ),
     );

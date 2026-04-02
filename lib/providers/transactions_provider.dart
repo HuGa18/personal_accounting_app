@@ -79,6 +79,13 @@ class TransactionsNotifier extends AsyncNotifier<List<Transaction>> {
     ref.invalidateSelf();
   }
 
+  /// 恢复已删除的交易
+  Future<void> restore(String id) async {
+    final repository = ref.read(transactionRepositoryProvider);
+    await repository.restore(id);
+    ref.invalidateSelf();
+  }
+
   /// 按账户查询
   Future<List<Transaction>> getByAccountId(String accountId) async {
     final repository = ref.read(transactionRepositoryProvider);

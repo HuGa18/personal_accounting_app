@@ -207,4 +207,17 @@ class TransactionRepository {
       whereArgs: [id],
     );
   }
+
+  Future<void> restore(String id) async {
+    final db = await _db;
+    await db.update(
+      'transactions',
+      {
+        'is_deleted': 0,
+        'updated_at': DateTime.now().toIso8601String(),
+      },
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }
